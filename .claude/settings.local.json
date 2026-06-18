@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Skill(update-config)",
+      "Skill(run)"
+    ],
+    "ask": [
+      "Bash",
+      "PowerShell"
+    ],
+    "defaultMode": "default"
+  },
+  "preferredNotifChannel": "terminal_bell"
+}

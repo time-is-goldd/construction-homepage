@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #2b313a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-pretendard);
+}
+
+/* DESIGN_SYSTEM.md 1장 컬러 팔레트 — 브랜드/중성/시맨틱 토큰 */
+@theme {
+  --color-brand-900: #0f1c30;
+  --color-brand-700: #16304d;
+  --color-brand-500: #1f4068;
+
+  --color-accent-600: #d9480f;
+  --color-accent-500: #e8590c;
+
+  --color-neutral-50: #f7f8fa;
+  --color-neutral-100: #eef0f3;
+  --color-neutral-200: #dde1e6;
+  --color-neutral-400: #9aa3ae;
+  --color-neutral-600: #5a6472;
+  --color-neutral-800: #2b313a;
+  --color-neutral-900: #171a1f;
+
+  --color-status-new: #2563eb;
+  --color-status-progress: #d97706;
+  --color-status-done: #16a34a;
+  --color-status-error: #dc2626;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-sans),
+    -apple-system,
+    "Apple SD Gothic Neo",
+    system-ui,
+    sans-serif;
+}
