@@ -2,12 +2,20 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
 
-export default function CtaBannerSection() {
+type CtaBannerSectionProps = {
+  heading?: string;
+  buttonLabel?: string;
+};
+
+export default function CtaBannerSection({
+  heading = "지금 바로 무료 견적을 받아보세요",
+  buttonLabel = "온라인 문의하기",
+}: CtaBannerSectionProps) {
   return (
     <section className="bg-brand-700">
       <Container className="flex flex-col items-center gap-6 py-16 text-center text-white md:py-20">
         <h2 className="text-2xl leading-[1.35] font-bold tracking-[-0.01em] md:text-[32px]">
-          지금 바로 무료 견적을 받아보세요
+          {heading}
         </h2>
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <a
@@ -17,7 +25,7 @@ export default function CtaBannerSection() {
             📞 {PHONE_DISPLAY}
           </a>
           <Button href="/contact" variant="cta" size="lg">
-            온라인 문의하기
+            {buttonLabel}
           </Button>
         </div>
       </Container>
