@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
+import { ADDRESS, EMAIL, PHONE_DISPLAY } from "@/lib/constants";
 
-// TODO: 실제 사업자 정보 확정 전 placeholder. Phase 4 이후 상수 분리 고려.
+// TODO: 실제 사업자 정보 확정 전 placeholder.
 const COMPANY_INFO = {
   name: "주식회사 회사명",
   ceo: "대표자명",
   registrationNumber: "123-45-67890",
-  address: "주소 입력 예정 (시/도 시/군/구 도로명)",
-  phone: "02-1234-5678",
-  email: "contact@example.com",
+  address: ADDRESS,
+  phone: PHONE_DISPLAY,
+  email: EMAIL,
 };
 
 const POLICY_LINKS = [
