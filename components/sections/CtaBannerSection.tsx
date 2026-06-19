@@ -8,7 +8,7 @@ type CtaBannerSectionProps = {
 };
 
 export default function CtaBannerSection({
-  heading = "지금 바로 무료 견적을 받아보세요",
+  heading = "농장에 필요한 시공, 지금 바로 무료 견적을 받아보세요",
   buttonLabel = "온라인 문의하기",
 }: CtaBannerSectionProps) {
   return (

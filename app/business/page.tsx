@@ -4,11 +4,12 @@ import BusinessServiceDetailSection from "@/components/sections/BusinessServiceD
 import CtaBannerSection from "@/components/sections/CtaBannerSection";
 import ProcessStepsSection from "@/components/sections/ProcessStepsSection";
 import SubHero from "@/components/ui/SubHero";
+import { COMPANY_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "사업분야 | construction-homepage",
+  title: `사업분야 | ${COMPANY_NAME}`,
   description:
-    "공장/플랜트, 리모델링, 토목공사, 유지보수 등 사업분야와 진행 프로세스를 안내합니다.",
+    "돈사 신축, 리모델링, 순환시설, 환기공사 등 사업분야와 진행 프로세스를 안내합니다.",
 };
 
 export default function BusinessPage() {

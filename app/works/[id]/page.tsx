@@ -7,6 +7,7 @@ import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import WorkCard from "@/components/works/WorkCard";
 import WorkGallery from "@/components/works/WorkGallery";
+import { COMPANY_NAME } from "@/lib/constants";
 import { WORKS, getWorkById, getWorkCategoryLabel } from "@/lib/mock-works";
 
 type WorkDetailPageProps = {
@@ -25,7 +26,7 @@ export async function generateMetadata({
   if (!work) return {};
 
   return {
-    title: `${work.title} | construction-homepage`,
+    title: `${work.title} | ${COMPANY_NAME}`,
     description: work.summary,
   };
 }
@@ -70,7 +71,7 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
       </section>
 
       <Section tone="white">
-        <WorkGallery title={work.title} />
+        <WorkGallery title={work.title} images={work.images} />
       </Section>
 
       <Section tone="muted">
@@ -79,9 +80,9 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
         </h2>
         <dl className="mt-6 grid grid-cols-1 gap-x-8 md:grid-cols-2">
           <InfoRow label="발주처" value={work.client ?? "비공개"} />
-          <InfoRow label="규모" value={work.scale} />
-          <InfoRow label="공사기간" value={work.period} />
-          <InfoRow label="위치" value={work.location} />
+          <InfoRow label="규모" value={work.scale ?? "확인 중"} />
+          <InfoRow label="공사기간" value={work.period ?? "확인 중"} />
+          <InfoRow label="위치" value={work.location ?? "확인 중"} />
           <InfoRow label="카테고리" value={categoryLabel} />
         </dl>
       </Section>

@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
+import { COMPANY_NAME, PHONE_DISPLAY, PHONE_TEL } from "@/lib/constants";
 
 type NavItem = {
   label: string;
@@ -60,8 +61,15 @@ export default function Header() {
       }`}
     >
       <Container className="flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="text-brand-700 text-lg font-bold md:text-xl">
-          회사명
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo/logo-full.png"
+            alt={COMPANY_NAME}
+            width={240}
+            height={92}
+            priority
+            className="h-9 w-auto md:h-10"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

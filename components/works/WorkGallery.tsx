@@ -1,19 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, type TouchEvent } from "react";
 import Lightbox from "@/components/ui/Lightbox";
 
 type WorkGalleryProps = {
   title: string;
-  count?: number;
+  images: string[];
 };
 
 const SWIPE_THRESHOLD_PX = 40;
 
-export default function WorkGallery({ title, count = 4 }: WorkGalleryProps) {
+export default function WorkGallery({ title, images }: WorkGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
-  const slides = Array.from({ length: count }, (_, i) => i);
+  const count = images.length;
 
   const goTo = (index: number) => {
     setActiveIndex((index + count) % count);
@@ -33,6 +34,8 @@ export default function WorkGallery({ title, count = 4 }: WorkGalleryProps) {
     touchStartX.current = null;
   };
 
+  const activeImage = images[activeIndex];
+
   return (
     <div>
       <Lightbox
@@ -41,34 +44,49 @@ export default function WorkGallery({ title, count = 4 }: WorkGalleryProps) {
           <div
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
-            className="flex aspect-video items-center justify-center rounded-xl bg-neutral-100"
+            className="relative aspect-video overflow-hidden rounded-xl bg-neutral-100"
           >
-            <span className="text-sm text-neutral-400">
-              {title} 이미지 {activeIndex + 1} (placeholder)
-            </span>
+            <Image
+              src={activeImage}
+              alt={`${title} 이미지 ${activeIndex + 1}`}
+              fill
+              sizes="(min-width: 768px) 800px, 100vw"
+              className="object-cover"
+              priority
+            />
           </div>
         }
       >
-        <div className="flex aspect-video items-center justify-center rounded-lg bg-neutral-100">
-          <span className="text-sm text-neutral-400">
-            {title} 이미지 {activeIndex + 1} (확대, placeholder)
-          </span>
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-neutral-100">
+          <Image
+            src={activeImage}
+            alt={`${title} 이미지 ${activeIndex + 1} 확대`}
+            fill
+            sizes="100vw"
+            className="object-contain"
+          />
         </div>
       </Lightbox>
 
       <div className="mt-3 flex gap-2 overflow-x-auto">
-        {slides.map((i) => (
+        {images.map((src, i) => (
           <button
-            key={i}
+            key={src}
             type="button"
             onClick={() => goTo(i)}
             aria-label={`이미지 ${i + 1}로 이동`}
             aria-current={i === activeIndex}
-            className={`flex h-16 w-24 flex-shrink-0 items-center justify-center rounded-lg border-2 bg-neutral-100 text-xs text-neutral-400 ${
+            className={`relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 ${
               i === activeIndex ? "border-brand-700" : "border-transparent"
             }`}
           >
-            {i + 1}
+            <Image
+              src={src}
+              alt=""
+              fill
+              sizes="96px"
+              className="object-cover"
+            />
           </button>
         ))}
       </div>

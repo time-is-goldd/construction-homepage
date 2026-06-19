@@ -1,6 +1,13 @@
-// TODO: Phase 4 Supabase `works` 테이블 연동 전 mock 데이터. DB 연동 금지 범위이므로 정적 배열만 사용.
-// 필드 구성은 DEVELOPMENT_PLAN.md의 works 스키마(title/category/summary/content/client/scale/period/location)를
-// 참고해 추후 실 데이터 연동 시 동일한 모양으로 교체할 수 있도록 맞췄다.
+// customer-assets/시공사례 실제 자료 기반 시공사례 데이터.
+// 사진은 모두 실사이며, 발주처/위치는 고객이 제공한 폴더명을 그대로 사용했다.
+// 정확한 규모/공사기간/날짜는 제공된 자료에 없어 null로 두고 상세 페이지에서
+// "확인 중"으로 표시한다 (추정값을 임의로 채우지 않음).
+//
+// 공사 유형이 폴더명에 명시된 5건(리모델링 1건 + 신축 4건)은 해당 카테고리로 분류했고,
+// "농장" 폴더 하위 8건(이화축산은 본채/비육사재축 2건으로 분리)은 공사 유형이 확인되지 않아
+// "unclassified"로 두었다 — IMAGE_MAPPING.md 누락자료 5번 항목 참고.
+
+import { BUSINESS_CATEGORIES } from "./constants";
 
 export type WorkCategory = {
   slug: string;
@@ -8,10 +15,11 @@ export type WorkCategory = {
 };
 
 export const WORK_CATEGORIES: WorkCategory[] = [
-  { slug: "factory-plant", label: "공장/플랜트" },
-  { slug: "remodeling", label: "리모델링" },
-  { slug: "civil", label: "토목" },
-  { slug: "maintenance", label: "유지보수" },
+  ...BUSINESS_CATEGORIES.map((category) => ({
+    slug: category.slug,
+    label: category.title,
+  })),
+  { slug: "unclassified", label: "공사유형 확인중" },
 ];
 
 export type WorkItem = {
@@ -21,188 +29,258 @@ export type WorkItem = {
   summary: string;
   content: string[];
   client: string | null;
-  scale: string;
-  period: string;
-  location: string;
-  date: string;
+  scale: string | null;
+  period: string | null;
+  location: string | null;
+  date: string | null;
+  images: string[];
 };
+
+function img(slug: string, filename: string): string {
+  return `/images/works/${slug}/${filename}`;
+}
+
+function imgRange(slug: string, count: number, ext = "jpg"): string[] {
+  return Array.from({ length: count }, (_, i) =>
+    img(slug, `${String(i + 1).padStart(2, "0")}.${ext}`),
+  );
+}
+
+const ihwaFatteningImages = [
+  ...imgRange("ihwa-livestock-fattening-renovation", 6, "png"),
+  ...Array.from({ length: 50 }, (_, i) =>
+    img(
+      "ihwa-livestock-fattening-renovation",
+      `${String(i + 7).padStart(2, "0")}.jpg`,
+    ),
+  ),
+  img("ihwa-livestock-fattening-renovation", "57.png"),
+];
 
 export const WORKS: WorkItem[] = [
   {
-    id: "1",
-    categorySlug: "factory-plant",
-    title: "○○공장 신축공사",
-    summary: "생산동 신축부터 설비 반입까지 일괄 진행한 프로젝트입니다.",
-    content: [
-      "생산설비 가동 일정에 맞춰 토목·골조·마감 공정을 순차적으로 진행한 신축 공장 프로젝트입니다.",
-      "공정 전반에 걸쳐 안전관리 기준을 적용했으며, 설비 반입 시점을 고려해 동선과 하중 계획을 사전에 검토했습니다.",
-      "준공 이후에도 정기 점검을 통해 시설 상태를 관리하고 있습니다.",
-    ],
-    client: "(주)○○산업",
-    scale: "연면적 3,200㎡",
-    period: "2024.10 ~ 2025.03 (5개월)",
-    location: "경기도 ○○시",
-    date: "2025.03",
-  },
-  {
-    id: "2",
+    id: "hoengseong-fire-restoration",
     categorySlug: "remodeling",
-    title: "○○물류센터 리모델링",
-    summary: "노후 구조물을 안전 기준에 맞춰 전면 개선했습니다.",
+    title: "강원도 횡성군 화재 복구공사",
+    summary: "화재로 피해를 입은 돈사를 복구한 리모델링 사례입니다.",
     content: [
-      "노후화된 물류센터의 구조 보강과 마감 개선을 함께 진행한 리모델링 프로젝트입니다.",
-      "현행 소방·안전 기준에 맞춰 설비를 교체하고, 운영 중단 기간을 최소화하기 위해 구역별 순차 공사로 진행했습니다.",
+      "화재 피해를 입은 돈사의 철거부터 단열 보강, 내부시설 재배치까지 종합 리모델링으로 복구한 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "비공개",
-    scale: "연면적 5,400㎡",
-    period: "2024.09 ~ 2025.01 (4개월)",
-    location: "인천광역시 ○○구",
-    date: "2025.01",
+    client: null,
+    scale: null,
+    period: null,
+    location: "강원도 횡성군",
+    date: null,
+    images: [
+      img("hoengseong-fire-restoration", "01.png"),
+      img("hoengseong-fire-restoration", "02.jpg"),
+      img("hoengseong-fire-restoration", "03.jpg"),
+      img("hoengseong-fire-restoration", "04.jpg"),
+    ],
   },
   {
-    id: "3",
-    categorySlug: "civil",
-    title: "○○산업단지 토목공사",
-    summary: "부지 조성부터 기반 공사까지 체계적으로 수행했습니다.",
+    id: "hwaseong-farm-reconstruction",
+    categorySlug: "new-construction",
+    title: "경기도 화성시 일괄농장 재축공사",
+    summary: "기존 농장을 새로 지은 일괄농장 재축공사 사례입니다.",
     content: [
-      "산업단지 신규 부지의 조성 공사로, 부지 평탄화부터 배수·기반 공사까지 전 과정을 수행했습니다.",
-      "설계 단계의 지반 조사 결과를 토대로 공정 계획을 수립해 일정 지연 없이 준공했습니다.",
+      "초기 부지 조성부터 완공까지 체계적인 공정 관리로 진행한 일괄농장 재축공사 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "○○개발(주)",
-    scale: "부지면적 12,000㎡",
-    period: "2024.06 ~ 2024.11 (5개월)",
-    location: "충청남도 ○○군",
-    date: "2024.11",
+    client: null,
+    scale: null,
+    period: null,
+    location: "경기도 화성시",
+    date: null,
+    images: imgRange("hwaseong-farm-reconstruction", 9, "png"),
   },
   {
-    id: "4",
-    categorySlug: "maintenance",
-    title: "○○공장 정기 유지보수",
-    summary: "준공 이후 정기 점검과 보수를 책임지고 진행했습니다.",
+    id: "andong-sow-house-reconstruction",
+    categorySlug: "new-construction",
+    title: "경북 안동 2층 모돈사 재축공사",
+    summary: "2층 모돈사를 재축한 신축공사 사례입니다.",
     content: [
-      "기존 준공 시설을 대상으로 한 정기 유지보수 계약으로, 설비 점검과 경미한 보수를 정기적으로 수행했습니다.",
-      "이상 발생 시 신속 대응 체계를 운영해 가동 중단 시간을 최소화했습니다.",
+      "돼지의 생리적 특성과 사양 단계를 고려한 맞춤 설계로 진행한 2층 모돈사 재축공사 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "비공개",
-    scale: "연면적 2,100㎡",
-    period: "2024.09 (정기 점검)",
-    location: "경기도 ○○시",
-    date: "2024.09",
+    client: null,
+    scale: null,
+    period: null,
+    location: "경북 안동",
+    date: null,
+    images: imgRange("andong-sow-house-reconstruction", 6, "png"),
   },
   {
-    id: "5",
-    categorySlug: "factory-plant",
-    title: "○○플랜트 증축공사",
-    summary: "기존 라인을 유지하며 생산 설비를 증축했습니다.",
+    id: "andong-piglet-house-construction",
+    categorySlug: "new-construction",
+    title: "경북 안동 3층 자돈사 신축공사",
+    summary: "3층 자돈사를 새로 지은 신축공사 사례입니다.",
     content: [
-      "기존 생산 라인의 가동을 유지한 상태에서 신규 라인을 증축하는 공사를 진행했습니다.",
-      "기존 설비와의 간섭을 피하기 위해 사전 시뮬레이션을 거쳐 공정을 계획했습니다.",
+      "단열과 내구성을 극대화한 자재로 진행한 3층 자돈사 신축공사 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "(주)○○플랜트",
-    scale: "증축면적 1,800㎡",
-    period: "2024.03 ~ 2024.07 (4개월)",
-    location: "충청북도 ○○시",
-    date: "2024.07",
+    client: null,
+    scale: null,
+    period: null,
+    location: "경북 안동",
+    date: null,
+    images: [
+      ...imgRange("andong-piglet-house-construction", 5, "png"),
+      img("andong-piglet-house-construction", "06.jpg"),
+    ],
   },
   {
-    id: "6",
-    categorySlug: "remodeling",
-    title: "○○사옥 리모델링",
-    summary: "사옥 내외부를 현대적 기준으로 개선한 사례입니다.",
+    id: "andong-fattening-house-reconstruction",
+    categorySlug: "new-construction",
+    title: "경북 안동 비육사 재축공사",
+    summary: "비육사를 재축한 신축공사 사례입니다.",
     content: [
-      "준공 후 20년이 지난 사옥의 외벽 및 내부 마감을 전면 개선한 리모델링 프로젝트입니다.",
-      "업무 공간 사용성을 높이기 위해 평면 일부를 재구성했습니다.",
+      "체계적인 공정 관리로 공기를 단축해 진행한 비육사 재축공사 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "비공개",
-    scale: "연면적 4,000㎡",
-    period: "2024.01 ~ 2024.05 (4개월)",
-    location: "서울특별시 ○○구",
-    date: "2024.05",
+    client: null,
+    scale: null,
+    period: null,
+    location: "경북 안동",
+    date: null,
+    images: [
+      img("andong-fattening-house-reconstruction", "01.png"),
+      img("andong-fattening-house-reconstruction", "02.jpg"),
+      img("andong-fattening-house-reconstruction", "03.png"),
+      img("andong-fattening-house-reconstruction", "04.png"),
+      img("andong-fattening-house-reconstruction", "05.jpg"),
+      img("andong-fattening-house-reconstruction", "06.png"),
+      img("andong-fattening-house-reconstruction", "07.png"),
+    ],
   },
   {
-    id: "7",
-    categorySlug: "civil",
-    title: "○○물류단지 부지조성",
-    summary: "신규 물류단지 부지를 조성한 프로젝트입니다.",
+    id: "nonghyup-sillim",
+    categorySlug: "unclassified",
+    title: "농협 신림",
+    summary: "농협 신림 현장의 시공 사례입니다.",
     content: [
-      "신규 물류단지 개발을 위한 부지 조성 공사로, 진입로 개설과 배수 체계 구축을 함께 진행했습니다.",
+      "하도급 없는 직영 시공 시스템으로 진행한 농협 신림 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "○○로지스틱스",
-    scale: "부지면적 9,500㎡",
-    period: "2023.11 ~ 2024.03 (4개월)",
-    location: "경기도 ○○시",
-    date: "2024.03",
+    client: "농협",
+    scale: null,
+    period: null,
+    location: "신림",
+    date: null,
+    images: imgRange("nonghyup-sillim", 3, "jpg"),
   },
   {
-    id: "8",
-    categorySlug: "maintenance",
-    title: "○○플랜트 설비 보수",
-    summary: "노후 설비를 점검하고 보수한 사례입니다.",
+    id: "nonghyup-uiseong",
+    categorySlug: "unclassified",
+    title: "농협 의성",
+    summary: "농협 의성 현장의 시공 사례입니다.",
     content: [
-      "장기 가동된 플랜트 설비의 노후 부위를 점검하고, 가동 중단 없이 단계적으로 보수했습니다.",
+      "하도급 없는 직영 시공 시스템으로 진행한 농협 의성 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "비공개",
-    scale: "설비 3개 라인",
-    period: "2024.01 (보수 작업)",
-    location: "충청남도 ○○시",
-    date: "2024.01",
+    client: "농협",
+    scale: null,
+    period: null,
+    location: "의성",
+    date: null,
+    images: imgRange("nonghyup-uiseong", 3, "jpg"),
   },
   {
-    id: "9",
-    categorySlug: "factory-plant",
-    title: "○○제2공장 신축공사",
-    summary: "기존 공장 인접 부지에 제2공장을 신축했습니다.",
+    id: "nonghyup-hapcheon",
+    categorySlug: "unclassified",
+    title: "농협 합천",
+    summary: "농협 합천 현장의 시공 사례입니다.",
     content: [
-      "기존 제1공장과의 연계 운영을 고려해 인접 부지에 제2공장을 신축한 프로젝트입니다.",
-      "기존 시설 운영에 지장이 없도록 동선을 분리해 공사를 진행했습니다.",
+      "하도급 없는 직영 시공 시스템으로 진행한 농협 합천 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "(주)○○산업",
-    scale: "연면적 2,800㎡",
-    period: "2023.06 ~ 2023.11 (5개월)",
-    location: "경기도 ○○시",
-    date: "2023.11",
+    client: "농협",
+    scale: null,
+    period: null,
+    location: "합천",
+    date: null,
+    images: imgRange("nonghyup-hapcheon", 5, "jpg"),
   },
   {
-    id: "10",
-    categorySlug: "remodeling",
-    title: "○○공장 내부 리모델링",
-    summary: "생산 효율 개선을 위해 내부 레이아웃을 재구성했습니다.",
+    id: "dondonfarm-gokseong",
+    categorySlug: "unclassified",
+    title: "돈돈팜 곡성",
+    summary: "돈돈팜 곡성 농장의 시공 사례입니다.",
     content: [
-      "생산 흐름 개선을 목표로 공장 내부 레이아웃을 재구성한 리모델링 프로젝트입니다.",
+      "돈사 전문 기술진이 직접 시공한 돈돈팜 곡성 농장 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "비공개",
-    scale: "연면적 1,500㎡",
-    period: "2023.07 ~ 2023.09 (2개월)",
-    location: "경상남도 ○○시",
-    date: "2023.09",
+    client: "돈돈팜",
+    scale: null,
+    period: null,
+    location: "곡성",
+    date: null,
+    images: imgRange("dondonfarm-gokseong", 7, "jpg"),
   },
   {
-    id: "11",
-    categorySlug: "civil",
-    title: "○○산업도로 토목공사",
-    summary: "산업단지 진입도로를 신설한 토목공사입니다.",
+    id: "dondonfarm-hoengseong",
+    categorySlug: "unclassified",
+    title: "돈돈팜 횡성",
+    summary: "돈돈팜 횡성 농장의 시공 사례입니다.",
     content: [
-      "산업단지 진입 편의를 위한 도로 신설 공사로, 배수 및 포장 공사를 함께 수행했습니다.",
+      "돈사 전문 기술진이 직접 시공한 돈돈팜 횡성 농장 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "○○군청",
-    scale: "도로길이 1.2km",
-    period: "2023.03 ~ 2023.07 (4개월)",
-    location: "전라북도 ○○군",
-    date: "2023.07",
+    client: "돈돈팜",
+    scale: null,
+    period: null,
+    location: "횡성",
+    date: null,
+    images: imgRange("dondonfarm-hoengseong", 4, "jpg"),
   },
   {
-    id: "12",
-    categorySlug: "maintenance",
-    title: "○○물류센터 유지보수",
-    summary: "물류센터 설비를 정기 점검하고 보수했습니다.",
+    id: "ihwa-livestock",
+    categorySlug: "unclassified",
+    title: "이화축산",
+    summary: "이화축산 농장의 시공 사례입니다.",
     content: [
-      "물류센터의 하역 설비와 보관 시설을 대상으로 정기 점검 및 보수를 진행했습니다.",
+      "돈사 전문 기술진이 직접 시공한 이화축산 농장 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
     ],
-    client: "비공개",
-    scale: "연면적 6,000㎡",
-    period: "2023.05 (정기 점검)",
-    location: "인천광역시 ○○구",
-    date: "2023.05",
+    client: "이화축산",
+    scale: null,
+    period: null,
+    location: null,
+    date: null,
+    images: imgRange("ihwa-livestock", 21, "jpg"),
+  },
+  {
+    id: "ihwa-livestock-fattening-renovation",
+    categorySlug: "unclassified",
+    title: "이화축산 비육사재축",
+    summary: "이화축산 비육사(재축) 시공 사례입니다.",
+    content: [
+      "이화축산 농장의 비육사를 재축한 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
+    ],
+    client: "이화축산",
+    scale: null,
+    period: null,
+    location: null,
+    date: null,
+    images: ihwaFatteningImages,
+  },
+  {
+    id: "jindo-hyodon",
+    categorySlug: "unclassified",
+    title: "진도 효돈",
+    summary: "진도 효돈 지역 농장의 시공 사례입니다.",
+    content: [
+      "하도급 없는 직영 시공 시스템으로 진행한 진도 효돈 현장 사례입니다.",
+      "정확한 규모·공사기간 등 세부 정보는 확인 중이며, 자세한 내용은 문의 시 안내드립니다.",
+    ],
+    client: null,
+    scale: null,
+    period: null,
+    location: "진도 효돈",
+    date: null,
+    images: imgRange("jindo-hyodon", 7, "jpg"),
   },
 ];
 

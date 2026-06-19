@@ -1,12 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// TODO: 실제 메인 비주얼 이미지는 Phase 4 관리자 업로드 연동 후 교체.
+// TODO: customer-assets에 메인 비주얼 원본이 1장만 제공됨(저해상도, 1405x567).
+// WIREFRAME 기준 최대 5장 구성 가능 — 추가 고해상도 사진 확보 후 교체/추가.
 const SLIDES = [
-  { id: 1, label: "메인 비주얼 1 (관리자 업로드 예정)" },
-  { id: 2, label: "메인 비주얼 2 (관리자 업로드 예정)" },
-  { id: 3, label: "메인 비주얼 3 (관리자 업로드 예정)" },
+  {
+    id: 1,
+    src: "/images/hero/hero-aerial-01.png",
+    alt: "대화시스템이 시공한 돈사 전경 항공 촬영",
+  },
 ];
 
 const AUTOPLAY_MS = 5000;
@@ -16,6 +20,8 @@ export default function HeroSlider() {
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (SLIDES.length <= 1) return;
+
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -38,32 +44,39 @@ export default function HeroSlider() {
         {SLIDES.map((slide, i) => (
           <div
             key={slide.id}
-            className={`from-brand-900 to-brand-500 absolute inset-0 flex items-center justify-center bg-gradient-to-br transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none ${
+            className={`absolute inset-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
           >
-            <span className="text-sm font-medium text-white/40">
-              {slide.label}
-            </span>
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
           </div>
         ))}
         <div className="bg-brand-900/55 absolute inset-0" />
       </div>
 
-      <div className="absolute inset-x-0 bottom-6 z-20 flex justify-center gap-2">
-        {SLIDES.map((slide, i) => (
-          <button
-            key={slide.id}
-            type="button"
-            aria-label={`${i + 1}번째 슬라이드로 이동`}
-            aria-current={i === index}
-            onClick={() => setIndex(i)}
-            className={`h-2.5 w-2.5 rounded-full transition-colors duration-150 ease-out ${
-              i === index ? "bg-accent-500" : "bg-white/50"
-            }`}
-          />
-        ))}
-      </div>
+      {SLIDES.length > 1 && (
+        <div className="absolute inset-x-0 bottom-6 z-20 flex justify-center gap-2">
+          {SLIDES.map((slide, i) => (
+            <button
+              key={slide.id}
+              type="button"
+              aria-label={`${i + 1}번째 슬라이드로 이동`}
+              aria-current={i === index}
+              onClick={() => setIndex(i)}
+              className={`h-2.5 w-2.5 rounded-full transition-colors duration-150 ease-out ${
+                i === index ? "bg-accent-500" : "bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

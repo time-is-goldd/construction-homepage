@@ -1,7 +1,9 @@
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { COMPANY_NAME } from "@/lib/constants";
 
-// TODO: 실제 대표 인사말 문구 및 사진은 콘텐츠 확정 후 교체.
+// TODO: 실제 대표 인사말 문구 및 사진, 대표이사명은 customer-assets에 제공되지 않아
+// placeholder 유지 중. 고객에게 확인 후 교체 필요.
 export default function CeoGreetingSection() {
   return (
     <Section tone="white">
@@ -15,14 +17,15 @@ export default function CeoGreetingSection() {
 
         <div className="md:w-2/3">
           <p className="text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-            안녕하십니까. 저희 회사를 찾아주신 모든 분들께 깊은 감사의 말씀을
-            드립니다.
+            안녕하십니까. {COMPANY_NAME}을 찾아주신 모든 분들께 깊은 감사의
+            말씀을 드립니다.
           </p>
           <p className="mt-4 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-            지난 28년간 공장·플랜트·리모델링·토목 분야에서 한 건의 현장도 소홀히
-            하지 않는다는 원칙으로 시공을 이어왔습니다. 안전과 품질은 타협할 수
-            없는 기준이며, 이 기준이 지금까지 저희를 신뢰해주신 고객들과의
-            약속이라고 믿습니다.
+            저희는 하도급 없는 직영 시공 시스템으로 돈사 신축부터 리모델링,
+            순환시설, 환기공사까지 한 건의 현장도 소홀히 하지 않는다는 원칙으로
+            시공을 이어왔습니다. 안전과 품질은 타협할 수 없는 기준이며, 이
+            기준이 지금까지 저희를 신뢰해주신 농가 고객들과의 약속이라고
+            믿습니다.
           </p>
           <p className="mt-4 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
             앞으로도 변하지 않는 기본기와 끊임없는 개선으로 더 나은 시공 결과를

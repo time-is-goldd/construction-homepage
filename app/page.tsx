@@ -5,11 +5,12 @@ import CtaBannerSection from "@/components/sections/CtaBannerSection";
 import HeroSection from "@/components/sections/HeroSection";
 import UspSection from "@/components/sections/UspSection";
 import WorksHighlightSection from "@/components/sections/WorksHighlightSection";
+import { COMPANY_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "construction-homepage | 신뢰의 시공 전문 기업",
+  title: `${COMPANY_NAME} | 대한민국 양돈 농가의 든든한 파트너`,
   description:
-    "30년 노하우의 시공 전문 기업입니다. 사업분야, 시공사례, 회사소개를 확인하고 무료 견적을 문의하세요.",
+    "노후 돈사 리모델링부터 대규모 신축 프로젝트까지, 사업분야·시공사례·회사소개를 확인하고 무료 견적을 문의하세요.",
 };
 
 export default function Home() {

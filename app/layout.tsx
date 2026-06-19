@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Footer from "@/components/common/Footer";
 import FloatingButton from "@/components/common/FloatingButton";
 import Header from "@/components/common/Header";
+import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/constants";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -13,8 +14,8 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "construction-homepage",
-  description: "제조·건설업 기업 홈페이지 프로젝트 (개발 진행 중)",
+  title: COMPANY_NAME,
+  description: COMPANY_TAGLINE,
 };
 
 export default function RootLayout({

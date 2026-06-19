@@ -3,8 +3,9 @@ import Card from "@/components/ui/Card";
 import Lightbox from "@/components/ui/Lightbox";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { COMPANY_NAME } from "@/lib/constants";
 
-// TODO: 실제 회사소개 문구/사업자등록증 이미지는 콘텐츠 확정 후 교체.
+// TODO: 사업자등록증 이미지는 customer-assets에 제공되지 않아 placeholder 유지 중.
 export default function CompanyIntroSection() {
   return (
     <Section tone="white">
@@ -12,12 +13,12 @@ export default function CompanyIntroSection() {
         <div className="md:w-1/2">
           <SectionHeading>회사소개</SectionHeading>
           <p className="mt-4 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-            저희는 지난 28년간 공장·플랜트·리모델링·토목 분야에서 일관된 품질의
-            시공을 제공해 온 전문 시공 기업입니다.
+            {COMPANY_NAME}은 하도급 없는 직영 시공 시스템으로 돈사 신축부터
+            리모델링, 순환시설, 환기공사까지 책임지는 축사 시공 전문 기업입니다.
           </p>
           <p className="mt-3 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-            안전과 공정 관리를 최우선으로 두고, 발주부터 준공 이후 유지보수까지
-            책임감 있게 함께합니다.
+            돈사 전문 기술진이 직접 시공하며, 시공 이후에도 1:1 맞춤 소통과 사후
+            관리로 농가와의 신뢰를 이어갑니다.
           </p>
           <Button href="/about" variant="secondary" size="md" className="mt-6">
             회사소개 더보기

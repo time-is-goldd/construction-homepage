@@ -5,18 +5,18 @@ import SubHero from "@/components/ui/SubHero";
 import Pagination from "@/components/works/Pagination";
 import WorkCard from "@/components/works/WorkCard";
 import WorksFilterBar from "@/components/works/WorksFilterBar";
+import { COMPANY_NAME } from "@/lib/constants";
 import { WORK_CATEGORIES, WORKS } from "@/lib/mock-works";
 
 const PAGE_SIZE = 9;
 
 export const metadata: Metadata = {
-  title: "시공사례 | construction-homepage",
-  description:
-    "공장/플랜트, 리모델링, 토목, 유지보수 시공사례를 카테고리별로 확인하세요.",
+  title: `시공사례 | ${COMPANY_NAME}`,
+  description: "돈사 신축, 리모델링 등 시공사례를 카테고리별로 확인하세요.",
 };
 
 type WorksPageProps = {
-  searchParams: Promise<{ category?: string; sort?: string; page?: string }>;
+  searchParams: Promise<{ category?: string; page?: string }>;
 };
 
 export default async function WorksPage({ searchParams }: WorksPageProps) {
@@ -26,20 +26,11 @@ export default async function WorksPage({ searchParams }: WorksPageProps) {
   )
     ? params.category
     : undefined;
-  const sort = params.sort === "oldest" ? "oldest" : "latest";
   const requestedPage = Math.max(1, Number(params.page) || 1);
 
-  const filtered = (
-    activeCategory
-      ? WORKS.filter((work) => work.categorySlug === activeCategory)
-      : WORKS
-  )
-    .slice()
-    .sort((a, b) =>
-      sort === "oldest"
-        ? a.date.localeCompare(b.date)
-        : b.date.localeCompare(a.date),
-    );
+  const filtered = activeCategory
+    ? WORKS.filter((work) => work.categorySlug === activeCategory)
+    : WORKS;
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(requestedPage, totalPages);
@@ -51,7 +42,6 @@ export default async function WorksPage({ searchParams }: WorksPageProps) {
   const buildPageHref = (page: number) => {
     const query = new URLSearchParams();
     if (activeCategory) query.set("category", activeCategory);
-    if (sort !== "latest") query.set("sort", sort);
     if (page > 1) query.set("page", String(page));
     const queryString = query.toString();
     return queryString ? `/works?${queryString}` : "/works";
@@ -65,7 +55,7 @@ export default async function WorksPage({ searchParams }: WorksPageProps) {
         breadcrumbItems={[{ label: "홈", href: "/" }, { label: "시공사례" }]}
       />
       <Section tone="white">
-        <WorksFilterBar activeCategory={activeCategory} sort={sort} />
+        <WorksFilterBar activeCategory={activeCategory} />
 
         {pageItems.length > 0 ? (
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">

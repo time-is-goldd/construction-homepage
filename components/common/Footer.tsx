@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import { ADDRESS, EMAIL, PHONE_DISPLAY } from "@/lib/constants";
+import { ADDRESS, COMPANY_NAME, EMAIL, PHONE_DISPLAY } from "@/lib/constants";
 
-// TODO: 실제 사업자 정보 확정 전 placeholder.
+// TODO: 대표자명/사업자등록번호/주소/전화/이메일은 customer-assets에 실제 자료가 제공되지
+// 않아 placeholder를 유지 중. 고객에게 확인 후 교체 필요.
 const COMPANY_INFO = {
-  name: "주식회사 회사명",
+  name: COMPANY_NAME,
   ceo: "대표자명",
   registrationNumber: "123-45-67890",
   address: ADDRESS,
