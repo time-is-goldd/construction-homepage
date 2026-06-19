@@ -6,8 +6,8 @@ import { BUSINESS_CATEGORIES } from "@/lib/constants";
 // 사업분야별 대표 시공사례 이미지. 분야가 명확히 확인된 케이스만 연결했다.
 // "순환시설 공사"/"환기공사"는 해당 유형으로 명확히 분류된 시공사례 사진이 아직 없어 비워둔다.
 const REPRESENTATIVE_IMAGE: Record<string, string> = {
-  "new-construction": "/images/works/hwaseong-farm-reconstruction/01.png",
-  remodeling: "/images/works/hoengseong-fire-restoration/01.png",
+  "new-construction": "/images/works/hwaseong-farm-reconstruction/01.webp",
+  remodeling: "/images/works/hoengseong-fire-restoration/01.webp",
 };
 
 export default function BusinessServiceDetailSection() {
