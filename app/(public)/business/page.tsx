@@ -4,13 +4,14 @@ import BusinessServiceDetailSection from "@/components/sections/BusinessServiceD
 import CtaBannerSection from "@/components/sections/CtaBannerSection";
 import ProcessStepsSection from "@/components/sections/ProcessStepsSection";
 import SubHero from "@/components/ui/SubHero";
-import { COMPANY_NAME } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
-  title: `사업분야 | ${COMPANY_NAME}`,
+export const metadata: Metadata = buildPageMetadata({
+  title: "사업분야",
   description:
     "돈사 신축, 리모델링, 순환시설, 환기공사 등 사업분야와 진행 프로세스를 안내합니다.",
-};
+  path: "/business",
+});
 
 export default function BusinessPage() {
   return (

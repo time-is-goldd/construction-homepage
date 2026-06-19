@@ -3,19 +3,19 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// TODO: customer-assets에 메인 비주얼 원본이 1장만 제공됨(저해상도, 1405x567).
-// WIREFRAME 기준 최대 5장 구성 가능 — 추가 고해상도 사진 확보 후 교체/추가.
-const SLIDES = [
-  {
-    id: 1,
-    src: "/images/hero/hero-aerial-01.png",
-    alt: "대화시스템이 시공한 돈사 전경 항공 촬영",
-  },
-];
+export type HeroSlide = {
+  id: string;
+  src: string;
+  alt: string;
+};
+
+type HeroSliderProps = {
+  slides: HeroSlide[];
+};
 
 const AUTOPLAY_MS = 5000;
 
-export default function HeroSlider() {
+export default function HeroSlider({ slides: SLIDES }: HeroSliderProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -32,7 +32,7 @@ export default function HeroSlider() {
     }, AUTOPLAY_MS);
 
     return () => clearInterval(timer);
-  }, [paused]);
+  }, [paused, SLIDES.length]);
 
   return (
     <div

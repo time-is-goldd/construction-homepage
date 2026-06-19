@@ -1,11 +1,9 @@
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
-import Lightbox from "@/components/ui/Lightbox";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { COMPANY_NAME } from "@/lib/constants";
+import { BUSINESS_REGISTRATION_NUMBER, COMPANY_NAME } from "@/lib/constants";
 
-// TODO: 사업자등록증 이미지는 customer-assets에 제공되지 않아 placeholder 유지 중.
 export default function CompanyIntroSection() {
   return (
     <Section tone="white">
@@ -26,28 +24,24 @@ export default function CompanyIntroSection() {
         </div>
 
         <div className="md:w-1/2">
-          <Lightbox
-            triggerLabel="사업자등록증 확대보기"
-            caption="사업자등록번호 123-45-67890"
-            trigger={
-              <Card tone="emphasized" className="relative">
-                <div className="flex aspect-[4/3] items-center justify-center rounded-lg bg-neutral-100">
-                  <span className="text-sm text-neutral-400">
-                    사업자등록증 (placeholder)
-                  </span>
-                </div>
-                <span className="text-brand-700 absolute top-3 right-3 flex items-center gap-1 rounded-md bg-white/90 px-2 py-1 text-xs font-medium shadow-[0_1px_3px_rgba(15,28,48,0.08)]">
-                  🔍 확대
-                </span>
-              </Card>
-            }
+          <a
+            href="/documents/business-registration.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="block"
           >
-            <div className="flex aspect-[4/3] items-center justify-center rounded-lg bg-neutral-100">
-              <span className="text-sm text-neutral-400">
-                사업자등록증 (placeholder, 확대보기)
-              </span>
-            </div>
-          </Lightbox>
+            <Card tone="emphasized" className="relative">
+              <div className="flex aspect-[4/3] flex-col items-center justify-center gap-3 rounded-lg bg-neutral-100">
+                <span className="text-4xl">📄</span>
+                <span className="text-[15px] font-medium text-neutral-700">
+                  사업자등록증 보기 (PDF)
+                </span>
+                <span className="text-sm text-neutral-500">
+                  사업자등록번호 {BUSINESS_REGISTRATION_NUMBER}
+                </span>
+              </div>
+            </Card>
+          </a>
         </div>
       </div>
     </Section>

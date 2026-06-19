@@ -1,9 +1,9 @@
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { COMPANY_NAME } from "@/lib/constants";
+import { COMPANY_NAME, REPRESENTATIVE_NAME } from "@/lib/constants";
 
-// TODO: 실제 대표 인사말 문구 및 사진, 대표이사명은 customer-assets에 제공되지 않아
-// placeholder 유지 중. 고객에게 확인 후 교체 필요.
+// TODO: 실제 대표 인사말 문구 및 사진은 customer-assets에 제공되지 않아 placeholder
+// 유지 중(대표이사명은 사업자등록증 기준 실명으로 교체됨). 고객에게 문구 확인 후 교체 필요.
 export default function CeoGreetingSection() {
   return (
     <Section tone="white">
@@ -32,7 +32,7 @@ export default function CeoGreetingSection() {
             약속드리겠습니다. 감사합니다.
           </p>
           <p className="mt-6 text-right text-[15px] font-medium text-neutral-800 md:text-base">
-            대표이사 ○○○
+            대표이사 {REPRESENTATIVE_NAME}
           </p>
         </div>
       </div>

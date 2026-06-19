@@ -1,13 +1,11 @@
 import Link from "next/link";
 import LogoutButton from "@/components/admin/LogoutButton";
 
-// 이미지관리/시공사례관리/문의관리는 Phase 4·5에서 구현될 예정이라
-// 아직 페이지가 없다 — 빈 라우트로 연결되는 대신 비활성 표시로 둔다.
 const NAV_ITEMS = [
   { label: "대시보드", href: "/admin", enabled: true },
-  { label: "이미지관리", href: "/admin/images", enabled: false },
-  { label: "시공사례관리", href: "/admin/works", enabled: false },
-  { label: "문의관리", href: "/admin/inquiries", enabled: false },
+  { label: "이미지관리", href: "/admin/images", enabled: true },
+  { label: "시공사례관리", href: "/admin/works", enabled: true },
+  { label: "문의관리", href: "/admin/inquiries", enabled: true },
 ];
 
 export default function AdminSidebar() {

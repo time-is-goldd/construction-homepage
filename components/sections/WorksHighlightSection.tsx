@@ -2,11 +2,12 @@ import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import WorkCard from "@/components/works/WorkCard";
-import { WORKS } from "@/lib/mock-works";
+import { listWorks } from "@/lib/works";
 
-const HIGHLIGHT_ITEMS = WORKS.slice(0, 6);
+export default async function WorksHighlightSection() {
+  const works = await listWorks({ publishedOnly: true });
+  const HIGHLIGHT_ITEMS = works.slice(0, 6);
 
-export default function WorksHighlightSection() {
   return (
     <Section tone="muted">
       <div className="flex items-end justify-between">

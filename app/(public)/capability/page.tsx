@@ -3,12 +3,13 @@ import CertificationSection from "@/components/sections/CertificationSection";
 import CtaBannerSection from "@/components/sections/CtaBannerSection";
 import EquipmentSection from "@/components/sections/EquipmentSection";
 import SubHero from "@/components/ui/SubHero";
-import { COMPANY_NAME } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
-  title: `보유역량 | ${COMPANY_NAME}`,
+export const metadata: Metadata = buildPageMetadata({
+  title: "보유역량",
   description: "보유 장비/설비와 인증서/자격증을 소개합니다.",
-};
+  path: "/capability",
+});
 
 export default function CapabilityPage() {
   return (

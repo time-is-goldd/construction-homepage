@@ -3,19 +3,35 @@
 // 실제 자료(customer-assets/문구.txt, 로고 이미지) 기준 확정 값.
 export const COMPANY_NAME = "(주)대화시스템";
 export const COMPANY_NAME_EN = "DAEHWASYSTEM";
+export const COMPANY_NAME_LEGAL = "주식회사 대화시스템";
 export const COMPANY_TAGLINE = "축사시공, 리모델링 및 양돈기자재 제조 판매";
 
-// TODO: 연락처(전화/이메일/주소/운영시간)는 customer-assets에 실제 자료가 제공되지 않아
-// placeholder를 유지 중. 고객에게 확인 후 교체 필요. Header/Footer/FloatingButton/CTA 배너/문의 페이지에서 공통 사용.
+// customer-assets/(주)대화시스템 사업자등록증.pdf 기준 확정 값(SEO 구조화 데이터,
+// 회사개요 페이지 등 NAP(Name-Address-Phone) 정보에 사용).
+export const REPRESENTATIVE_NAME = "박병배";
+export const BUSINESS_REGISTRATION_NUMBER = "450-87-01374";
+export const CORPORATE_REGISTRATION_NUMBER = "174811-0101595";
+export const FOUNDED_DATE = "2019-10-14";
+export const EMAIL = "dhsystem2019@naver.com";
+export const ADDRESS = "경상북도 경산시 와촌면 불굴사길 87-8";
+export const ADDRESS_REGION = "경상북도";
+export const ADDRESS_LOCALITY = "경산시";
+// 시공사례가 경북뿐 아니라 강원·전남 등 전국에 분포해 LocalBusiness의
+// areaServed는 전국으로 설정한다(lib/seo/structured-data.ts).
+export const SERVICE_AREA = "대한민국 전국";
+
+// TODO: 전화번호는 customer-assets에 실제 자료가 제공되지 않아 placeholder를
+// 유지 중. 고객에게 확인 후 교체 필요. Header/Footer/FloatingButton/CTA 배너/
+// 문의 페이지/구조화 데이터(LocalBusiness.telephone)에서 공통 사용.
 export const PHONE_DISPLAY = "02-1234-5678";
 export const PHONE_TEL = "tel:0212345678";
-export const EMAIL = "contact@example.com";
-export const ADDRESS = "주소 입력 예정 (시/도 시/군/구 도로명)";
 export const BUSINESS_HOURS = "평일 09:00 - 18:00 (주말·공휴일 휴무)";
+// 구조화 데이터의 openingHoursSpecification에 쓰는 ISO 8601 요일/시간 표기.
+export const BUSINESS_HOURS_ISO = "Mo-Fr 09:00-18:00";
 
 // customer-assets/문구.txt > "3. 사업분야" 그대로 적용.
-// 사업분야 소개(홈/사업분야 페이지)와 시공사례 카테고리 필터(lib/mock-works.ts)가
-// 동일한 slug를 공유하므로 이 배열을 단일 출처로 둔다.
+// 사업분야 소개(홈/사업분야 페이지)와 시공사례 카테고리(Supabase categories 테이블,
+// supabase/seed.sql)가 동일한 slug를 공유하므로 이 배열을 단일 출처로 둔다.
 export type BusinessCategory = {
   slug: string;
   title: string;

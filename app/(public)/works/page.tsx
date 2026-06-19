@@ -5,15 +5,18 @@ import SubHero from "@/components/ui/SubHero";
 import Pagination from "@/components/works/Pagination";
 import WorkCard from "@/components/works/WorkCard";
 import WorksFilterBar from "@/components/works/WorksFilterBar";
-import { COMPANY_NAME } from "@/lib/constants";
-import { WORK_CATEGORIES, WORKS } from "@/lib/mock-works";
+import { getCategoriesWithUnclassified, listWorks } from "@/lib/works";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const PAGE_SIZE = 9;
 
-export const metadata: Metadata = {
-  title: `시공사례 | ${COMPANY_NAME}`,
+// 카테고리/페이지 쿼리는 같은 콘텐츠의 변형이므로 canonical은 항상 베이스
+// 경로(/works)를 가리켜 중복 콘텐츠로 인식되지 않게 한다.
+export const metadata: Metadata = buildPageMetadata({
+  title: "시공사례",
   description: "돈사 신축, 리모델링 등 시공사례를 카테고리별로 확인하세요.",
-};
+  path: "/works",
+});
 
 type WorksPageProps = {
   searchParams: Promise<{ category?: string; page?: string }>;
@@ -21,7 +24,12 @@ type WorksPageProps = {
 
 export default async function WorksPage({ searchParams }: WorksPageProps) {
   const params = await searchParams;
-  const activeCategory = WORK_CATEGORIES.some(
+  const [categories, works] = await Promise.all([
+    getCategoriesWithUnclassified(),
+    listWorks({ publishedOnly: true }),
+  ]);
+
+  const activeCategory = categories.some(
     (category) => category.slug === params.category,
   )
     ? params.category
@@ -29,8 +37,8 @@ export default async function WorksPage({ searchParams }: WorksPageProps) {
   const requestedPage = Math.max(1, Number(params.page) || 1);
 
   const filtered = activeCategory
-    ? WORKS.filter((work) => work.categorySlug === activeCategory)
-    : WORKS;
+    ? works.filter((work) => (work.category?.slug ?? "unclassified") === activeCategory)
+    : works;
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(requestedPage, totalPages);
@@ -55,7 +63,7 @@ export default async function WorksPage({ searchParams }: WorksPageProps) {
         breadcrumbItems={[{ label: "홈", href: "/" }, { label: "시공사례" }]}
       />
       <Section tone="white">
-        <WorksFilterBar activeCategory={activeCategory} />
+        <WorksFilterBar categories={categories} activeCategory={activeCategory} />
 
         {pageItems.length > 0 ? (
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">

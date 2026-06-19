@@ -37,6 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# 시공사례 이미지 원본 백업 (IMAGE_OPTIMIZATION_PLAN.md §4 — public/ 밖에 보관, git에는 올리지 않음)
+/assets/originals/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -6,12 +6,13 @@ import HistoryTimelineSection from "@/components/sections/HistoryTimelineSection
 import VisionMissionSection from "@/components/sections/VisionMissionSection";
 import Container from "@/components/ui/Container";
 import SubHero from "@/components/ui/SubHero";
-import { COMPANY_NAME } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
-  title: `회사소개 | ${COMPANY_NAME}`,
+export const metadata: Metadata = buildPageMetadata({
+  title: "회사소개",
   description: "대표 인사말과 비전·미션·핵심가치, 회사연혁을 소개합니다.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

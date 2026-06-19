@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { WORK_CATEGORIES } from "@/lib/mock-works";
+import type { Category } from "@/types/category";
 
 type WorksFilterBarProps = {
+  categories: Category[];
   activeCategory?: string;
 };
 
@@ -18,6 +19,7 @@ function tabClass(active: boolean) {
 }
 
 export default function WorksFilterBar({
+  categories,
   activeCategory,
 }: WorksFilterBarProps) {
   return (
@@ -25,13 +27,13 @@ export default function WorksFilterBar({
       <Link href={buildHref(undefined)} className={tabClass(!activeCategory)}>
         전체
       </Link>
-      {WORK_CATEGORIES.map((category) => (
+      {categories.map((category) => (
         <Link
           key={category.slug}
           href={buildHref(category.slug)}
           className={tabClass(activeCategory === category.slug)}
         >
-          {category.label}
+          {category.name}
         </Link>
       ))}
     </nav>

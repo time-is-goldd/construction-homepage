@@ -6,7 +6,10 @@
       "Edit",
       "Skill(update-config)",
       "Skill(run)",
-      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('.claude/settings.local.json','utf-8'\\)\\); console.log\\('valid json'\\)\")"
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('.claude/settings.local.json','utf-8'\\)\\); console.log\\('valid json'\\)\")",
+      "Bash(ls -la .env*)",
+      "Bash(find . -maxdepth 1 -iname \"*.env*\")",
+      "Bash(ls -la .vercel)"
     ],
     "defaultMode": "bypassPermissions"
   },
