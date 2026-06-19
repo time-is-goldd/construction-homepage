@@ -1,24 +1,17 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Footer from "@/components/common/Footer";
 import FloatingButton from "@/components/common/FloatingButton";
 import Header from "@/components/common/Header";
 import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/constants";
-import "./globals.css";
-
-const pretendard = localFont({
-  src: "../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",
-  variable: "--font-pretendard",
-  weight: "45 920",
-  display: "swap",
-});
+import { pretendard } from "@/lib/fonts";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: COMPANY_NAME,
   description: COMPANY_TAGLINE,
 };
 
-export default function RootLayout({
+export default function PublicLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
