@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
 // 이미 인증된 사용자가 /admin/login에 접근하면 /admin으로 보낸다.
 // 세션 만료(리프레시 토큰 만료) 시에도 매 요청마다 getUser()가 실패하므로
 // 별도의 idle 타이머 없이 자연스럽게 로그인 페이지로 돌아간다.
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
