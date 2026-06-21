@@ -2,6 +2,7 @@ import {
   ADDRESS,
   ADDRESS_LOCALITY,
   ADDRESS_REGION,
+  BUSINESS_CATEGORIES,
   BUSINESS_HOURS_ISO,
   BUSINESS_REGISTRATION_NUMBER,
   COMPANY_NAME,
@@ -81,16 +82,11 @@ export function buildLocalBusinessJsonLd() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "사업분야",
-      itemListElement: [
-        "돈사 신축 공사",
-        "돈사 리모델링 공사",
-        "순환시설 공사",
-        "환기공사",
-      ].map((name) => ({
+      itemListElement: BUSINESS_CATEGORIES.map((category) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name,
+          name: category.title,
           provider: { "@id": `${SITE_URL}/#localbusiness` },
         },
       })),

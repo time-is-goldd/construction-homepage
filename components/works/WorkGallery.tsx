@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRef, useState, type TouchEvent } from "react";
-import Lightbox from "@/components/ui/Lightbox";
 
 type WorkGalleryProps = {
   title: string;
@@ -38,35 +37,20 @@ export default function WorkGallery({ title, images }: WorkGalleryProps) {
 
   return (
     <div>
-      <Lightbox
-        triggerLabel={`${title} 이미지 확대보기`}
-        trigger={
-          <div
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-            className="relative aspect-video overflow-hidden rounded-xl bg-neutral-100"
-          >
-            <Image
-              src={activeImage}
-              alt={`${title} 이미지 ${activeIndex + 1}`}
-              fill
-              sizes="(min-width: 768px) 800px, 100vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-        }
+      <div
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        className="relative aspect-video overflow-hidden rounded-xl bg-neutral-100"
       >
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-neutral-100">
-          <Image
-            src={activeImage}
-            alt={`${title} 이미지 ${activeIndex + 1} 확대`}
-            fill
-            sizes="100vw"
-            className="object-contain"
-          />
-        </div>
-      </Lightbox>
+        <Image
+          src={activeImage}
+          alt={`${title} 이미지 ${activeIndex + 1}`}
+          fill
+          sizes="(min-width: 768px) 800px, 100vw"
+          className="object-cover"
+          priority
+        />
+      </div>
 
       <div className="mt-3 flex gap-2 overflow-x-auto">
         {images.map((src, i) => (

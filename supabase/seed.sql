@@ -12,12 +12,18 @@
 
 begin;
 
+-- 고객 검수 피드백(2026-06)으로 "환기공사"가 "내부시설"로 개편되며 slug도
+-- 함께 바뀌었다. 이미 설치된 DB에서는 슬러그만 바꿔두면 아래 on conflict가
+-- 새 행을 추가하는 대신 기존 행을 그대로 갱신한다(연결된 works의 category_id는
+-- 그대로 유지됨).
+update categories set slug = 'internal-facility' where slug = 'ventilation';
+
 insert into categories (name, slug, sort_order)
 values
   ('돈사 신축 공사', 'new-construction', 0),
   ('돈사 리모델링 공사', 'remodeling', 1),
-  ('순환시설 공사', 'circulation', 2),
-  ('환기공사', 'ventilation', 3)
+  ('액비탱크/순환시설', 'circulation', 2),
+  ('내부시설', 'internal-facility', 3)
 on conflict (slug) do update
   set name = excluded.name,
       sort_order = excluded.sort_order;

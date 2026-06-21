@@ -12,10 +12,6 @@ export const workSchema = z.object({
     .trim()
     .transform((value) => (value === "" || value === "unclassified" ? null : value))
     .nullable(),
-  clientName: z.string().trim().optional(),
-  isClientHidden: z.boolean().default(false),
-  scale: z.string().trim().optional(),
-  period: z.string().trim().optional(),
   location: z.string().trim().optional(),
   isPublished: z.boolean().default(true),
 });

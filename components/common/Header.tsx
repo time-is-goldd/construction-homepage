@@ -18,13 +18,13 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "회사소개",
     children: [
-      { label: "인사말/비전", href: "/about" },
+      { label: "인사말", href: "/about" },
       { label: "회사개요", href: "/about/company" },
     ],
   },
   { label: "사업분야", href: "/business" },
   { label: "시공사례", href: "/works" },
-  { label: "보유역량", href: "/capability" },
+  { label: "시공실적", href: "/performance" },
   { label: "고객문의", href: "/contact" },
 ];
 

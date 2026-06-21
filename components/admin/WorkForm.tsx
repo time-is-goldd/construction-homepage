@@ -72,45 +72,13 @@ export default function WorkForm({ mode, categories, work }: WorkFormProps) {
         </select>
       </Field>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Field label="발주처">
-          <input
-            name="clientName"
-            defaultValue={work?.clientName ?? ""}
-            className={INPUT_CLASS}
-          />
-        </Field>
-        <Field label="규모">
-          <input
-            name="scale"
-            defaultValue={work?.scale ?? ""}
-            className={INPUT_CLASS}
-          />
-        </Field>
-        <Field label="공사기간">
-          <input
-            name="period"
-            defaultValue={work?.period ?? ""}
-            className={INPUT_CLASS}
-          />
-        </Field>
-        <Field label="위치">
-          <input
-            name="location"
-            defaultValue={work?.location ?? ""}
-            className={INPUT_CLASS}
-          />
-        </Field>
-      </div>
-
-      <label className="flex items-center gap-2 text-[14px] text-neutral-700">
+      <Field label="위치">
         <input
-          type="checkbox"
-          name="isClientHidden"
-          defaultChecked={work?.isClientHidden ?? false}
+          name="location"
+          defaultValue={work?.location ?? ""}
+          className={INPUT_CLASS}
         />
-        발주처명 비공개
-      </label>
+      </Field>
 
       <label className="flex items-center gap-2 text-[14px] text-neutral-700">
         <input

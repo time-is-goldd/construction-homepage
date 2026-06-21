@@ -12,7 +12,8 @@ export default function CompanyIntroSection() {
           <SectionHeading>회사소개</SectionHeading>
           <p className="mt-4 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
             {COMPANY_NAME}은 하도급 없는 직영 시공 시스템으로 돈사 신축부터
-            리모델링, 순환시설, 환기공사까지 책임지는 축사 시공 전문 기업입니다.
+            리모델링, 액비탱크/순환시설, 내부시설까지 책임지는 축사 시공 전문
+            기업입니다.
           </p>
           <p className="mt-3 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
             돈사 전문 기술진이 직접 시공하며, 시공 이후에도 1:1 맞춤 소통과 사후

@@ -100,24 +100,6 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
         />
       </Section>
 
-      <Section tone="muted">
-        <h2 className="text-[20px] leading-[1.4] font-semibold text-neutral-900 md:text-2xl">
-          프로젝트 정보
-        </h2>
-        <dl className="mt-6 grid grid-cols-1 gap-x-8 md:grid-cols-2">
-          <InfoRow
-            label="발주처"
-            value={
-              work.isClientHidden ? "비공개" : work.clientName ?? "비공개"
-            }
-          />
-          <InfoRow label="규모" value={work.scale ?? "확인 중"} />
-          <InfoRow label="공사기간" value={work.period ?? "확인 중"} />
-          <InfoRow label="위치" value={work.location ?? "확인 중"} />
-          <InfoRow label="카테고리" value={categoryLabel} />
-        </dl>
-      </Section>
-
       <Section tone="white">
         <h2 className="text-[20px] leading-[1.4] font-semibold text-neutral-900 md:text-2xl">
           작업 설명
@@ -177,16 +159,5 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
         buttonLabel="지금 문의하기"
       />
     </>
-  );
-}
-
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col gap-1 border-b border-neutral-200 py-3 md:flex-row md:gap-0">
-      <dt className="text-[15px] font-medium text-neutral-600 md:w-[120px] md:flex-shrink-0 md:text-base">
-        {label}
-      </dt>
-      <dd className="text-[15px] text-neutral-900 md:text-base">{value}</dd>
-    </div>
   );
 }

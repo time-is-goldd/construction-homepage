@@ -9,7 +9,7 @@ import { buildPageMetadata } from "@/lib/seo/page-metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "사업분야",
   description:
-    "돈사 신축, 리모델링, 순환시설, 환기공사 등 사업분야와 진행 프로세스를 안내합니다.",
+    "돈사 신축, 리모델링, 액비탱크/순환시설, 내부시설 등 사업분야와 진행 프로세스를 안내합니다.",
   path: "/business",
 });
 

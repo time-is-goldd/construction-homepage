@@ -20,11 +20,11 @@ export const ADDRESS_LOCALITY = "경산시";
 // areaServed는 전국으로 설정한다(lib/seo/structured-data.ts).
 export const SERVICE_AREA = "대한민국 전국";
 
-// TODO: 전화번호는 customer-assets에 실제 자료가 제공되지 않아 placeholder를
-// 유지 중. 고객에게 확인 후 교체 필요. Header/Footer/FloatingButton/CTA 배너/
-// 문의 페이지/구조화 데이터(LocalBusiness.telephone)에서 공통 사용.
-export const PHONE_DISPLAY = "02-1234-5678";
-export const PHONE_TEL = "tel:0212345678";
+// 고객 검수 피드백 반영(실제 전화번호로 확정). Header/Footer/FloatingButton/
+// CTA 배너/문의 페이지/구조화 데이터(Organization·LocalBusiness.telephone)에서
+// 공통 사용.
+export const PHONE_DISPLAY = "053-854-4508";
+export const PHONE_TEL = "tel:0538544508";
 export const BUSINESS_HOURS = "평일 09:00 - 18:00 (주말·공휴일 휴무)";
 // 구조화 데이터의 openingHoursSpecification에 쓰는 ISO 8601 요일/시간 표기.
 export const BUSINESS_HOURS_ISO = "Mo-Fr 09:00-18:00";
@@ -61,7 +61,7 @@ export const BUSINESS_CATEGORIES: BusinessCategory[] = [
   },
   {
     slug: "circulation",
-    title: "순환시설 공사",
+    title: "액비탱크/순환시설",
     icon: "♻️",
     shortDescription:
       "악취 민원과 분뇨 처리를 해결하는 고품질 액비 저장조·순환 시스템을 시공합니다.",
@@ -69,12 +69,12 @@ export const BUSINESS_CATEGORIES: BusinessCategory[] = [
       "악취 민원 해결과 원활한 분뇨 처리를 위한 고품질 액비 저장조 및 순환 시스템을 시공합니다. 완전 밀폐형 구조와 부식에 강한 자재를 사용하여 누수를 철저히 방지하며, 효율적인 슬러리 순환 설비를 통해 돈사 내 가스 발생을 줄이고 쾌적한 사육 환경을 유지합니다.",
   },
   {
-    slug: "ventilation",
-    title: "환기공사",
-    icon: "🌬️",
+    slug: "internal-facility",
+    title: "내부시설",
+    icon: "🛠️",
     shortDescription:
-      "정밀 음압 설계로 사계절 사각지대 없는 환기 시스템을 구축합니다.",
+      "모돈·자돈·비육돈 생육 단계에 맞춘 위생적이고 과학적인 내부 시설을 시공합니다.",
     description:
-      "돈사 구조와 사육 두수에 맞춘 정밀 음압 설계를 바탕으로 입·배기 휀(Fan)과 컨트롤러를 연동 설치합니다. 여름철 고온 스트레스를 방지하기 위한 쿨링패드 시스템을 포함하여, 사계절 내내 사각지대 없이 원활한 공기 흐름을 유지할 수 있도록 시공합니다.",
+      "농가의 사육 환경 개선과 생산성 극대화를 위해 견고하고 위생적인 내부 시설을 시공합니다. 고품질 기자재를 사용하여 돈사 내부 위생 관리를 용이하게 하며, 모돈·자돈·비육돈 등 각 생육 단계에 맞춘 과학적인 공간 설계로 각 농장에 맞는 최적의 사육 환경을 제공합니다.",
   },
 ];

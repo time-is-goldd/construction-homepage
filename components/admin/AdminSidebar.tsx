@@ -5,6 +5,7 @@ const NAV_ITEMS = [
   { label: "대시보드", href: "/admin", enabled: true },
   { label: "이미지관리", href: "/admin/images", enabled: true },
   { label: "시공사례관리", href: "/admin/works", enabled: true },
+  { label: "시공실적관리", href: "/admin/performance", enabled: true },
   { label: "문의관리", href: "/admin/inquiries", enabled: true },
 ];
 
