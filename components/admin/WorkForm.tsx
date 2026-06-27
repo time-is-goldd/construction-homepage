@@ -61,9 +61,10 @@ export default function WorkForm({ mode, categories, work }: WorkFormProps) {
       <Field label="카테고리">
         <select
           name="categoryId"
-          defaultValue={work?.categoryId ?? "unclassified"}
+          defaultValue={work?.categoryId ?? ""}
           className={INPUT_CLASS}
         >
+          <option value="">카테고리 선택</option>
           {categories.map((category) => (
             <option key={category.slug} value={category.id}>
               {category.name}

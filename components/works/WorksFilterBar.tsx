@@ -24,9 +24,6 @@ export default function WorksFilterBar({
 }: WorksFilterBarProps) {
   return (
     <nav aria-label="카테고리 필터" className="flex gap-2 overflow-x-auto pb-1">
-      <Link href={buildHref(undefined)} className={tabClass(!activeCategory)}>
-        전체
-      </Link>
       {categories.map((category) => (
         <Link
           key={category.slug}

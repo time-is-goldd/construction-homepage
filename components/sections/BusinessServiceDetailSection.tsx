@@ -10,6 +10,8 @@ import { getCategoryImageMap } from "@/lib/site-images";
 const FALLBACK_IMAGE: Record<string, string> = {
   "new-construction": "/images/works/hwaseong-farm-reconstruction/01.webp",
   remodeling: "/images/works/hoengseong-fire-restoration/01.webp",
+  circulation: "/images/business/liquid-manure-system.webp",
+  "internal-facility": "/images/business/internal-facility.webp",
 };
 
 export default async function BusinessServiceDetailSection() {

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import WorkForm from "@/components/admin/WorkForm";
 import WorkImageManager from "@/components/admin/WorkImageManager";
 import Card from "@/components/ui/Card";
-import { getCategoriesWithUnclassified, getWorkById } from "@/lib/works";
+import { getCategories, getWorkById } from "@/lib/works";
 
 type EditWorkPageProps = {
   params: Promise<{ id: string }>;
@@ -12,7 +12,7 @@ export default async function EditWorkPage({ params }: EditWorkPageProps) {
   const { id } = await params;
   const [work, categories] = await Promise.all([
     getWorkById(id),
-    getCategoriesWithUnclassified(),
+    getCategories(),
   ]);
 
   if (!work) notFound();

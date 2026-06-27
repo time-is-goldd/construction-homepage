@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DeleteInquiryButton from "@/components/admin/DeleteInquiryButton";
 import InquiryMemoForm from "@/components/admin/InquiryMemoForm";
 import InquiryStatusSelect from "@/components/admin/InquiryStatusSelect";
 import Card from "@/components/ui/Card";
@@ -29,9 +30,12 @@ export default async function InquiryDetailPage({
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-neutral-900">문의 상세</h1>
-        <Link href="/admin/inquiries" className="text-brand-700 text-[14px] hover:underline">
-          ← 목록으로
-        </Link>
+        <div className="flex items-center gap-3">
+          <DeleteInquiryButton inquiryId={inquiry.id} />
+          <Link href="/admin/inquiries" className="text-brand-700 text-[14px] hover:underline">
+            ← 목록으로
+          </Link>
+        </div>
       </div>
 
       <Card>

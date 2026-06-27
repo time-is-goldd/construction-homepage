@@ -32,3 +32,9 @@ export async function createSignedAttachmentUrl(
   if (error || !data) return null;
   return data.signedUrl;
 }
+
+export async function deleteInquiryAttachment(path: string): Promise<void> {
+  const admin = createAdminClient();
+  const { error } = await admin.storage.from(BUCKET).remove([path]);
+  if (error) throw error;
+}

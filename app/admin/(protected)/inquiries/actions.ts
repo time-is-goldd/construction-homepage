@@ -1,7 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { deleteInquiryAttachment } from "@/lib/storage/upload-attachment";
 import type { InquiryStatus } from "@/types/inquiry";
 
 async function requireAdminUser() {
@@ -39,4 +42,26 @@ export async function updateInquiryMemo(id: string, memo: string): Promise<void>
   if (error) throw error;
 
   revalidatePath(`/admin/inquiries/${id}`);
+}
+
+export async function deleteInquiry(id: string): Promise<void> {
+  await requireAdminUser();
+  const admin = createAdminClient();
+
+  const { data: inquiry } = await admin
+    .from("inquiries")
+    .select("attachment_url")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (inquiry?.attachment_url) {
+    await deleteInquiryAttachment(inquiry.attachment_url);
+  }
+
+  const { error } = await admin.from("inquiries").delete().eq("id", id);
+  if (error) throw error;
+
+  revalidatePath("/admin/inquiries");
+  revalidatePath("/admin");
+  redirect("/admin/inquiries");
 }

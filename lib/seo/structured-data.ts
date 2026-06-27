@@ -3,7 +3,6 @@ import {
   ADDRESS_LOCALITY,
   ADDRESS_REGION,
   BUSINESS_CATEGORIES,
-  BUSINESS_HOURS_ISO,
   BUSINESS_REGISTRATION_NUMBER,
   COMPANY_NAME,
   COMPANY_NAME_LEGAL,
@@ -73,12 +72,6 @@ export function buildLocalBusinessJsonLd() {
       addressCountry: "KR",
     },
     areaServed: SERVICE_AREA,
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: BUSINESS_HOURS_ISO.split(" ")[1].split("-")[0],
-      closes: BUSINESS_HOURS_ISO.split(" ")[1].split("-")[1],
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "사업분야",

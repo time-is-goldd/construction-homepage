@@ -5,8 +5,6 @@ import Container from "@/components/ui/Container";
 import SubHero from "@/components/ui/SubHero";
 import {
   ADDRESS,
-  BUSINESS_CATEGORIES,
-  BUSINESS_HOURS,
   BUSINESS_REGISTRATION_NUMBER,
   COMPANY_NAME,
   COMPANY_NAME_LEGAL,
@@ -31,10 +29,9 @@ const COMPANY_FACTS = [
   { label: "주소", value: ADDRESS },
   { label: "전화", value: PHONE_DISPLAY },
   { label: "이메일", value: EMAIL },
-  { label: "운영시간", value: BUSINESS_HOURS },
   {
     label: "사업분야",
-    value: BUSINESS_CATEGORIES.map((category) => category.title).join(" · "),
+    value: "돈사 신축, 리모델링, 순환시설, 내부시설 등 돈사 시설 일괄공사",
   },
 ];
 

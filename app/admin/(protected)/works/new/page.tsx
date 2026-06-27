@@ -1,9 +1,9 @@
 import WorkForm from "@/components/admin/WorkForm";
 import Card from "@/components/ui/Card";
-import { getCategoriesWithUnclassified } from "@/lib/works";
+import { getCategories } from "@/lib/works";
 
 export default async function NewWorkPage() {
-  const categories = await getCategoriesWithUnclassified();
+  const categories = await getCategories();
 
   return (
     <div className="flex flex-col gap-6">

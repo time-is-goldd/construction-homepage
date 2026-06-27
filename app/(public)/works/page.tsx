@@ -5,7 +5,7 @@ import SubHero from "@/components/ui/SubHero";
 import Pagination from "@/components/works/Pagination";
 import WorkCard from "@/components/works/WorkCard";
 import WorksFilterBar from "@/components/works/WorksFilterBar";
-import { getCategoriesWithUnclassified, listWorks } from "@/lib/works";
+import { getCategories, listWorks } from "@/lib/works";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const PAGE_SIZE = 9;
@@ -25,7 +25,7 @@ type WorksPageProps = {
 export default async function WorksPage({ searchParams }: WorksPageProps) {
   const params = await searchParams;
   const [categories, works] = await Promise.all([
-    getCategoriesWithUnclassified(),
+    getCategories(),
     listWorks({ publishedOnly: true }),
   ]);
 
@@ -37,7 +37,7 @@ export default async function WorksPage({ searchParams }: WorksPageProps) {
   const requestedPage = Math.max(1, Number(params.page) || 1);
 
   const filtered = activeCategory
-    ? works.filter((work) => (work.category?.slug ?? "unclassified") === activeCategory)
+    ? works.filter((work) => work.category?.slug === activeCategory)
     : works;
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
