@@ -2,23 +2,31 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { BUSINESS_REGISTRATION_NUMBER, COMPANY_NAME } from "@/lib/constants";
+import { BUSINESS_REGISTRATION_NUMBER } from "@/lib/constants";
+import { CONTENT_KEY_DEFS } from "@/lib/content-keys";
+import { getSiteContent } from "@/lib/site-contents";
 
-export default function CompanyIntroSection() {
+const KEY = "home.company_intro";
+const FALLBACK = CONTENT_KEY_DEFS.find((d) => d.key === KEY)?.fallback ?? "";
+
+export default async function CompanyIntroSection() {
+  const raw = await getSiteContent(KEY);
+  const text = raw || FALLBACK;
+  const paragraphs = text.split(/\n\n+/);
+
   return (
     <Section tone="white">
       <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
         <div className="md:w-1/2">
           <SectionHeading>회사소개</SectionHeading>
-          <p className="mt-4 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-            {COMPANY_NAME}은 하도급 없는 직영 시공 시스템으로 돈사 신축부터
-            리모델링, 액비탱크/순환시설, 내부시설까지 책임지는 축사 시공 전문
-            기업입니다.
-          </p>
-          <p className="mt-3 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-            돈사 전문 기술진이 직접 시공하며, 시공 이후에도 1:1 맞춤 소통과 사후
-            관리로 농가와의 신뢰를 이어갑니다.
-          </p>
+          {paragraphs.map((para, i) => (
+            <p
+              key={i}
+              className={`${i === 0 ? "mt-4" : "mt-3"} text-[15px] leading-[1.6] text-neutral-600 md:text-base`}
+            >
+              {para}
+            </p>
+          ))}
           <Button href="/about" variant="secondary" size="md" className="mt-6">
             회사소개 더보기
           </Button>

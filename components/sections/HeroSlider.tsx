@@ -58,7 +58,7 @@ export default function HeroSlider({ slides: SLIDES }: HeroSliderProps) {
             />
           </div>
         ))}
-        <div className="bg-brand-900/55 absolute inset-0" />
+        <div className="bg-brand-900/65 absolute inset-0" />
       </div>
 
       {SLIDES.length > 1 && (

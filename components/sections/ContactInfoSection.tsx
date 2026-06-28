@@ -2,7 +2,6 @@ import Card from "@/components/ui/Card";
 import Section from "@/components/ui/Section";
 import {
   ADDRESS,
-  BUSINESS_HOURS,
   EMAIL,
   PHONE_DISPLAY,
   PHONE_TEL,
@@ -12,13 +11,12 @@ const INFO_ITEMS = [
   { icon: "📞", label: "전화", value: PHONE_DISPLAY, href: PHONE_TEL },
   { icon: "✉️", label: "이메일", value: EMAIL, href: `mailto:${EMAIL}` },
   { icon: "📍", label: "주소", value: ADDRESS, href: undefined },
-  { icon: "🕐", label: "운영시간", value: BUSINESS_HOURS, href: undefined },
 ];
 
 export default function ContactInfoSection() {
   return (
     <Section tone="white">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6">
         {INFO_ITEMS.map((item) => (
           <Card key={item.label} className="flex flex-col gap-2">
             <span className="text-2xl">{item.icon}</span>

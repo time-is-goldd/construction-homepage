@@ -61,14 +61,14 @@ export default function Header() {
       }`}
     >
       <Container className="flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex self-stretch items-center py-1.5">
           <Image
-            src="/images/logo/logo-full.png"
+            src="/images/logo/logo-header.jpg"
             alt={COMPANY_NAME}
-            width={240}
-            height={92}
+            width={6485}
+            height={2477}
             priority
-            className="h-9 w-auto md:h-10"
+            className="h-full w-auto object-contain"
           />
         </Link>
 

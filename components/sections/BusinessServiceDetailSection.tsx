@@ -2,7 +2,17 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
 import { BUSINESS_CATEGORIES } from "@/lib/constants";
+import { CONTENT_KEY_DEFS } from "@/lib/content-keys";
 import { getCategoryImageMap } from "@/lib/site-images";
+import { getMultipleSiteContents } from "@/lib/site-contents";
+
+// slug → content key 매핑 (lib/content-keys.ts 정의와 일치해야 한다)
+const SLUG_TO_KEY: Record<string, string> = {
+  "new-construction": "business.new_construction",
+  remodeling: "business.remodeling",
+  circulation: "business.circulation",
+  "internal-facility": "business.internal_facility",
+};
 
 // 사업분야별 대표 이미지. 관리자(/admin/images > 사업분야 이미지)에서 업로드한
 // 이미지가 있으면 그것을 우선 사용하고, 없으면 분야가 명확히 확인된 시공사례
@@ -15,7 +25,11 @@ const FALLBACK_IMAGE: Record<string, string> = {
 };
 
 export default async function BusinessServiceDetailSection() {
-  const categoryImages = await getCategoryImageMap();
+  const contentKeys = Object.values(SLUG_TO_KEY);
+  const [categoryImages, contents] = await Promise.all([
+    getCategoryImageMap(),
+    getMultipleSiteContents(contentKeys),
+  ]);
 
   return (
     <Section tone="muted">
@@ -23,6 +37,11 @@ export default async function BusinessServiceDetailSection() {
         {BUSINESS_CATEGORIES.map((category, i) => {
           const image =
             categoryImages[category.slug]?.url ?? FALLBACK_IMAGE[category.slug];
+          const contentKey = SLUG_TO_KEY[category.slug];
+          const fallbackDesc =
+            CONTENT_KEY_DEFS.find((d) => d.key === contentKey)?.fallback ??
+            category.description;
+          const description = contents[contentKey] || fallbackDesc;
 
           return (
             <div
@@ -53,7 +72,7 @@ export default async function BusinessServiceDetailSection() {
                   {category.title}
                 </h3>
                 <p className="mt-3 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-                  {category.description}
+                  {description}
                 </p>
                 <Button
                   href={`/works?category=${category.slug}`}
