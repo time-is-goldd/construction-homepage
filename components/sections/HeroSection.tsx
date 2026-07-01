@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import { COMPANY_NAME } from "@/lib/constants";
 import { CONTENT_KEY_DEFS } from "@/lib/content-keys";
 import { listSiteImages } from "@/lib/site-images";
 import { getMultipleSiteContents } from "@/lib/site-contents";
@@ -42,6 +43,11 @@ export default async function HeroSection() {
     <section className="bg-brand-900 relative isolate overflow-hidden">
       <HeroSlider slides={slides} />
       <Container className="relative z-10 flex min-h-[480px] flex-col items-center justify-center gap-5 py-16 text-center text-white md:min-h-[600px] md:gap-6 md:py-24">
+        {/* 회사명 */}
+        <p className="text-[28px] leading-[1.3] font-bold tracking-[-0.02em] md:text-[40px]">
+          {COMPANY_NAME}
+        </p>
+
         {/* 메인 슬로건 */}
         <h1 className="text-[22px] leading-[1.4] font-semibold tracking-[-0.01em] md:text-[32px]">
           {heroTitle}
