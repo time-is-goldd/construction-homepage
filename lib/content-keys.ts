@@ -1,4 +1,4 @@
-import { BUSINESS_CATEGORIES, COMPANY_NAME, REPRESENTATIVE_NAME } from "@/lib/constants";
+import { BUSINESS_CATEGORIES, COMPANY_NAME } from "@/lib/constants";
 
 export type ContentKeyDef = {
   key: string;
@@ -25,7 +25,7 @@ export const CONTENT_KEY_DEFS: ContentKeyDef[] = [
     title: "히어로 서브문구",
     section: "메인페이지",
     fallback:
-      "노후 돈사 리모델링부터 대규모 신축 프로젝트까지, 불필요한 비용은 줄이고 농장의 가치는 높여드립니다.",
+      "노후 돈사 리모델링부터 대규모 신축 프로젝트까지,\n불필요한 비용은 줄이고 농장의 가치는 높여드립니다.",
     rows: 3,
   },
   {
@@ -40,7 +40,7 @@ export const CONTENT_KEY_DEFS: ContentKeyDef[] = [
     key: "about.ceo_greeting",
     title: "대표 인사말 (단락 구분: 빈 줄)",
     section: "회사소개",
-    fallback: `안녕하십니까. ${COMPANY_NAME}을 찾아주신 모든 분들께 깊은 감사의 말씀을 드립니다.\n\n저희는 하도급 없는 직영 시공 시스템으로 돈사 신축부터 리모델링, 액비탱크/순환시설, 내부시설까지 한 건의 현장도 소홀히 하지 않는다는 원칙으로 시공을 이어왔습니다. 안전과 품질은 타협할 수 없는 기준이며, 이 기준이 지금까지 저희를 신뢰해주신 농가 고객들과의 약속이라고 믿습니다.\n\n앞으로도 변하지 않는 기본기와 끊임없는 개선으로 더 나은 시공 결과를 약속드리겠습니다. 감사합니다.\n\n대표이사 ${REPRESENTATIVE_NAME}`,
+    fallback: `안녕하십니까. ${COMPANY_NAME}을 찾아주신 모든 분들께 깊은 감사의 말씀을 드립니다.\n\n저희는 직영 시공 시스템으로 단 한 곳의 현장도 소홀히 하지 않는다는 원칙으로 시공을 이어왔습니다.\n\n이러한 철저함과 신속함이 지금까지 저희를 신뢰해 주신 농가 고객들과의 약속이라고 믿습니다.\n\n앞으로도 변하지 않는 기본기와 끊임없는 개선으로 더 나은 시공 결과를 약속드리겠습니다.\n\n감사합니다.\n\n${COMPANY_NAME} 직원일동`,
     rows: 12,
   },
   // ── 사업분야 ─────────────────────────────────────────────────────────────

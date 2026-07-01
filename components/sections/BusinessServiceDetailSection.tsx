@@ -20,8 +20,8 @@ const SLUG_TO_KEY: Record<string, string> = {
 const FALLBACK_IMAGE: Record<string, string> = {
   "new-construction": "/images/works/hwaseong-farm-reconstruction/01.webp",
   remodeling: "/images/works/hoengseong-fire-restoration/01.webp",
-  circulation: "/images/business/liquid-manure-system.webp",
-  "internal-facility": "/images/business/internal-facility.webp",
+  circulation: "/images/business/liquid-manure-tank.png",
+  "internal-facility": "/images/business/internal-facility-new.png",
 };
 
 export default async function BusinessServiceDetailSection() {
@@ -71,9 +71,14 @@ export default async function BusinessServiceDetailSection() {
                 <h3 className="text-[20px] leading-[1.4] font-semibold text-neutral-900 md:text-2xl">
                   {category.title}
                 </h3>
-                <p className="mt-3 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-                  {description}
-                </p>
+                {description.split(/\n\n+/).map((para, idx) => (
+                  <p
+                    key={idx}
+                    className={`${idx === 0 ? "mt-3" : "mt-3"} text-[15px] leading-[1.6] text-neutral-600 md:text-base`}
+                  >
+                    {para}
+                  </p>
+                ))}
                 <Button
                   href={`/works?category=${category.slug}`}
                   variant="ghost"

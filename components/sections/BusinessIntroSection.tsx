@@ -9,8 +9,7 @@ export default function BusinessIntroSection() {
         양돈 농가에 필요한 시공을 한 번의 의뢰로 책임지는 축사 시공 전문 기업입니다.
       </p>
       <p className="mt-4 text-[15px] leading-[1.6] text-neutral-600 md:text-base">
-        하도급 없는 직영 시공 시스템과 돈사 전문 기술진을 바탕으로 일관된 품질
-        기준을 적용하며, 농장 규모와 일정에 맞춘 최적의 시공 방식을 제안합니다.
+        하도급 없는 직영 시공 시스템과 돈사 전문 기술진을 바탕으로 농장 규모와 일정에 맞춘 최적의 시공 방식을 제안합니다.
       </p>
     </Section>
   );

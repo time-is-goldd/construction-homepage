@@ -24,7 +24,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   { label: "사업분야", href: "/business" },
   { label: "시공사례", href: "/works" },
-  { label: "시공실적", href: "/performance" },
+  { label: "기업 파트너십", href: "/performance" },
   { label: "고객문의", href: "/contact" },
 ];
 

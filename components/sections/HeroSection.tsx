@@ -1,7 +1,5 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
-import { COMPANY_NAME } from "@/lib/constants";
 import { CONTENT_KEY_DEFS } from "@/lib/content-keys";
 import { listSiteImages } from "@/lib/site-images";
 import { getMultipleSiteContents } from "@/lib/site-contents";
@@ -44,30 +42,13 @@ export default async function HeroSection() {
     <section className="bg-brand-900 relative isolate overflow-hidden">
       <HeroSlider slides={slides} />
       <Container className="relative z-10 flex min-h-[480px] flex-col items-center justify-center gap-5 py-16 text-center text-white md:min-h-[600px] md:gap-6 md:py-24">
-        {/* 로고마크: 흰색 컨테이너로 어두운 배경에서 선명하게 */}
-        <div className="flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-white/95 shadow-[0_4px_24px_rgba(0,0,0,0.45)] md:h-24 md:w-24">
-          <Image
-            src="/images/logo/logo-mark.png"
-            alt={`${COMPANY_NAME} 로고`}
-            width={72}
-            height={72}
-            priority
-            className="h-[50px] w-[50px] md:h-16 md:w-16"
-          />
-        </div>
-
-        {/* 회사명 — Hero 최대 텍스트 */}
-        <p className="text-[36px] leading-[1.2] font-bold tracking-[-0.02em] md:text-[52px]">
-          {COMPANY_NAME}
-        </p>
-
         {/* 메인 슬로건 */}
         <h1 className="text-[22px] leading-[1.4] font-semibold tracking-[-0.01em] md:text-[32px]">
           {heroTitle}
         </h1>
 
         {/* 서브 문구 */}
-        <p className="max-w-xl text-base leading-[1.7] text-white/85 md:text-lg">
+        <p className="max-w-xl whitespace-pre-line text-base leading-[1.7] text-white/85 md:text-lg">
           {heroSubtitle}
         </p>
 
