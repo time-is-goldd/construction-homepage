@@ -62,7 +62,7 @@ export default async function HeroSection() {
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button
             href="/contact"
-            variant="primary"
+            variant="cta"
             size="lg"
             className="w-full sm:w-auto"
           >
