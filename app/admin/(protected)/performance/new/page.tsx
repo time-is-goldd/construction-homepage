@@ -4,7 +4,7 @@ import Card from "@/components/ui/Card";
 export default function NewPerformancePage() {
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-xl font-bold text-neutral-900">새 시공실적 등록</h1>
+      <h1 className="text-xl font-bold text-neutral-900">시공 실적 등록</h1>
       <Card>
         <PerformanceForm mode="create" />
       </Card>

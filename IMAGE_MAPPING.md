@@ -32,10 +32,11 @@ public/images/
 │   ├── logo-full.png              # 풀 로고, 투명배경 (6486x2477) — Header/Footer 기본
 │   ├── logo-full-white-bg.jpg     # 풀 로고, 흰 배경 (위와 동일 레이아웃)
 │   ├── logo-full-alt.png          # 풀 로고 대안 레이아웃, 투명배경 (6332x2783)
-│   ├── logo-full-alt-white-bg.jpg # 풀 로고 대안 레이아웃, 흰 배경
-│   ├── dondonfarm-logo.png        # 돈돈팜 기업 로고 (3차 피드백) — /performance 파트너십 카드
-│   ├── nonghyup-jondon-logo.png   # 농협종돈사업소 기업 로고 (3차 피드백) — /performance 파트너십 카드
-│   └── seonjin-village-logo.png   # 선진한마을 기업 로고 (3차 피드백) — /performance 파트너십 카드
+│   └── logo-full-alt-white-bg.jpg # 풀 로고 대안 레이아웃, 흰 배경
+├── performance/
+│   ├── dondonfarm-logo.webp       # 돈돈팜 로고 (WebP 변환, 165×73, 3.8KB) — /performance 파트너 카드
+│   ├── nh-breeding-logo.webp      # 농협종돈사업소 로고 (WebP 변환, 686×438, 39.5KB) — /performance 파트너 카드
+│   └── sunjin-logo.webp           # 선진한마을 로고 (WebP 변환, 425×300, 11.3KB) — /performance 파트너 카드
 ├── hero/
 │   └── hero-aerial-01.png         # 항공 촬영 전경 (1405x567) — 유일한 메인비주얼 원본
 └── works/
@@ -82,7 +83,7 @@ public/images/
 | 3. 회사소개(회사개요) | 3) 사업자등록증 섹션 | — | ❌ 미제공 |
 | 3. 회사소개(회사개요) | 4) 조직도/인력현황(선택) | — | ❌ 미제공 (선택 항목) |
 | 4. 사업분야 | 3) 서비스 항목별 상세 이미지(좌우 교차배치) | 신축: `works/hwaseong-farm-reconstruction/01.webp`, 리모델링: `works/hoengseong-fire-restoration/01.webp`, 순환시설: `business/liquid-manure-tank.png` (3차 교체), 내부시설: `business/internal-facility-new.png` (3차 교체) | ✅ 4개 분야 모두 이미지 확보 완료 |
-| /performance (기업 파트너십) | 파트너십 카드 기업 로고 | `logo/dondonfarm-logo.png`, `logo/nonghyup-jondon-logo.png`, `logo/seonjin-village-logo.png` | ✅ 3개 로고 확보 완료 |
+| /performance (기업 파트너십) | 파트너 세로 리스트 기업 로고 | `performance/dondonfarm-logo.webp`, `performance/nh-breeding-logo.webp`, `performance/sunjin-logo.webp` | ✅ WebP 변환 완료 |
 | 5. 시공사례 목록 | 3) 카드 그리드 썸네일 | `works/<slug>/01.*` | ✅ 사용 가능 |
 | 6. 시공사례 상세 | 2) 메인 이미지 갤러리 (전체) | `works/<slug>/*.*` 전부 | ✅ 사용 가능 |
 | 7. 보유역량 | 2) 보유 장비/설비 섹션 | — | ❌ 미제공 (시공사례 사진 속에 장비가 등장하지만 별도 "장비 단독 컷"은 없음) |

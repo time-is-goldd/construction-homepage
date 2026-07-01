@@ -1,15 +1,27 @@
 import Link from "next/link";
 import { togglePublish } from "@/app/admin/(protected)/works/actions";
 import DeleteWorkButton from "@/components/admin/DeleteWorkButton";
+import SuccessBanner from "@/components/admin/SuccessBanner";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import { listWorks } from "@/lib/works";
 
-export default async function AdminWorksPage() {
+type AdminWorksPageProps = {
+  searchParams: Promise<{ success?: string }>;
+};
+
+export default async function AdminWorksPage({
+  searchParams,
+}: AdminWorksPageProps) {
+  const { success } = await searchParams;
   const works = await listWorks();
 
   return (
     <div className="flex flex-col gap-6">
+      {success === "work" && (
+        <SuccessBanner message="시공사례가 성공적으로 등록되었습니다." />
+      )}
+
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-neutral-900">시공사례관리</h1>
         <Button href="/admin/works/new" size="sm">

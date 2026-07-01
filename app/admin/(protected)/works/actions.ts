@@ -68,9 +68,35 @@ export async function createWork(
     return { error: error?.message ?? "시공사례 등록에 실패했습니다." };
   }
 
+  // 이미지 업로드 (선택, 실패해도 등록은 완료)
+  const files = formData
+    .getAll("images")
+    .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+
+  for (const [index, file] of files.entries()) {
+    const result = validateImageFile(file);
+    if (!result.ok) continue;
+    try {
+      const { url } = await uploadOptimizedImage({
+        bucket: "work-images",
+        folder: work.id,
+        file,
+        longEdge: WORK_IMAGE_LONG_EDGE,
+      });
+      await admin.from("work_images").insert({
+        work_id: work.id,
+        url,
+        is_main: index === 0,
+        sort_order: index,
+      });
+    } catch {
+      // 이미지 업로드 실패는 비치명적 — 편집 페이지에서 재업로드 가능
+    }
+  }
+
   revalidatePath("/admin/works");
   revalidatePath("/works");
-  redirect(`/admin/works/${work.id}`);
+  redirect("/admin/works?success=work");
 }
 
 export async function updateWork(

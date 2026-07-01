@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useActionState, useRef, useState } from "react";
+import { useActionState, useState } from "react";
 import {
   addWorkImages,
   deleteWorkImage,
   type ImageActionState,
 } from "@/app/admin/(protected)/works/actions";
+import ImageDropZone from "@/components/admin/ImageDropZone";
 import Button from "@/components/ui/Button";
-import { validateImageFile } from "@/lib/utils/image";
 import type { WorkImage } from "@/types/work";
 
 type WorkImageManagerProps = {
@@ -25,24 +25,11 @@ export default function WorkImageManager({
     ImageActionState,
     FormData
   >(uploadAction, undefined);
-  const [clientError, setClientError] = useState<string | null>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files ?? []);
-    for (const file of files) {
-      const result = validateImageFile(file);
-      if (!result.ok) {
-        setClientError(result.error);
-        event.target.value = "";
-        return;
-      }
-    }
-    setClientError(null);
-  };
+  const [resetKey, setResetKey] = useState(0);
 
   return (
     <div className="flex flex-col gap-5">
+      {/* 기존 이미지 그리드 */}
       {images.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {images.map((image) => (
@@ -89,32 +76,29 @@ export default function WorkImageManager({
         </p>
       )}
 
+      {/* 업로드 폼 */}
       <form
-        ref={formRef}
         action={(formData) => {
-          setClientError(null);
           formAction(formData);
-          formRef.current?.reset();
+          setResetKey((k) => k + 1);
         }}
-        className="flex flex-col gap-2 border-t border-neutral-200 pt-4"
+        className="flex flex-col gap-3 border-t border-neutral-200 pt-5"
       >
-        <label className="text-[14px] font-medium text-neutral-800">
-          이미지 추가 (jpg/png/webp, 장당 5MB 이하)
-        </label>
-        <input
-          type="file"
+        <ImageDropZone
+          key={resetKey}
           name="images"
-          accept="image/jpeg,image/png,image/webp"
           multiple
-          onChange={handleFileChange}
-          className="text-[14px]"
+          label="이미지 추가 (jpg/png/webp, 5MB 이하)"
         />
-        {(clientError || state?.error) && (
-          <p className="text-status-error text-[13px]">
-            {clientError ?? state?.error}
-          </p>
+        {state?.error && (
+          <p className="text-status-error text-[13px]">{state.error}</p>
         )}
-        <Button type="submit" size="sm" disabled={pending} className="self-start">
+        <Button
+          type="submit"
+          size="sm"
+          disabled={pending}
+          className="self-start"
+        >
           {pending ? "업로드 중..." : "업로드"}
         </Button>
       </form>

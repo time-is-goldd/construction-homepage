@@ -13,7 +13,7 @@ export default function DeletePerformanceButton({
         type="submit"
         className="text-status-error font-medium hover:underline"
         onClick={(event) => {
-          if (!confirm("이 시공실적을 삭제할까요?")) {
+          if (!confirm("이 시공 실적을 삭제할까요?")) {
             event.preventDefault();
           }
         }}
